@@ -3,6 +3,8 @@ package com.mysql.proxy.spring.bean;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.alibaba.fastjson.JSON;
+
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 4913969154309588768L;
@@ -11,7 +13,7 @@ public class User implements Serializable {
 	private String name;
 	private Integer age;
 	private String address;
-	private Date createAt;
+	private Date createdAt;
 
 	public Integer getId() {
 		return id;
@@ -45,11 +47,16 @@ public class User implements Serializable {
 		this.age = age;
 	}
 
-	public Date getCreateAt() {
-		return createAt;
+	public Date getCreatedAt() {
+		return createdAt;
 	}
 
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	@Override
+	public String toString() {
+		return JSON.toJSONString(this);
 	}
 }

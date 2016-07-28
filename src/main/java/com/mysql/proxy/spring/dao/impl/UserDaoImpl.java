@@ -21,14 +21,14 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void save(final User user) {
-		String sql = "INSERT INTO `user`(`name`,age,address,createAt) VALUES(?,?,?,?)";
+		String sql = "INSERT INTO `user`(`name`,age,address,createdAt) VALUES(?,?,?,?)";
 		jdbcTemplate.update(sql, new PreparedStatementSetter() {
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
 				ps.setString(1, user.getName());
 				ps.setInt(2, user.getAge());
 				ps.setString(3, user.getAddress());
-				ps.setObject(4, user.getCreateAt());
+				ps.setObject(4, user.getCreatedAt());
 			}
 		});
 	}

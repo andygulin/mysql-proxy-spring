@@ -1,4 +1,4 @@
-package com.mysql.proxy.spring.test;
+package com.mysql.proxy.spring;
 
 import java.util.Date;
 import java.util.List;
@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
-import com.alibaba.fastjson.JSON;
 import com.mysql.proxy.spring.bean.User;
 import com.mysql.proxy.spring.config.AppConfig;
 import com.mysql.proxy.spring.ds.CustomerContextHolder;
@@ -27,7 +26,7 @@ public class ProxyTest extends AbstractJUnit4SpringContextTests {
 		user.setName("小明");
 		user.setAge(12);
 		user.setAddress("上海");
-		user.setCreateAt(new Date());
+		user.setCreatedAt(new Date());
 		userService.save(user);
 
 		CustomerContextHolder.setCustomerType(CustomerContextHolder.DATA_SOURCE_B);
@@ -35,7 +34,7 @@ public class ProxyTest extends AbstractJUnit4SpringContextTests {
 		user2.setName("小明");
 		user2.setAge(12);
 		user2.setAddress("上海");
-		user2.setCreateAt(new Date());
+		user2.setCreatedAt(new Date());
 		userService.save(user2);
 	}
 
@@ -43,14 +42,11 @@ public class ProxyTest extends AbstractJUnit4SpringContextTests {
 	public void query() {
 		CustomerContextHolder.setCustomerType(CustomerContextHolder.DATA_SOURCE_A);
 		List<User> users = userService.query();
-		for (User user : users) {
-			System.out.println(JSON.toJSONString(user));
-		}
+		System.out.println(users);
 		System.out.println("----------------------------------------------------");
+
 		CustomerContextHolder.setCustomerType(CustomerContextHolder.DATA_SOURCE_B);
-		List<User> users2 = userService.query();
-		for (User user : users2) {
-			System.out.println(JSON.toJSONString(user));
-		}
+		users = userService.query();
+		System.out.println(users);
 	}
 }

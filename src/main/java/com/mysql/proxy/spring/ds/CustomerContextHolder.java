@@ -1,6 +1,10 @@
 package com.mysql.proxy.spring.ds;
 
+import org.apache.log4j.Logger;
+
 public class CustomerContextHolder {
+
+	private static final Logger logger = Logger.getLogger(CustomerContextHolder.class);
 
 	public static final String DATA_SOURCE_A = "dataSourceA";
 
@@ -10,6 +14,7 @@ public class CustomerContextHolder {
 
 	public static void setCustomerType(String customerType) {
 		contextHolder.set(customerType);
+		logger.info("Switch DataSource -> " + customerType);
 	}
 
 	public static String getCustomerType() {
