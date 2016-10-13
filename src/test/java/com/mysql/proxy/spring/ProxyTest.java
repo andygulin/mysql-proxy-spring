@@ -28,6 +28,7 @@ public class ProxyTest extends AbstractJUnit4SpringContextTests {
 		user.setAddress("上海");
 		user.setCreatedAt(new Date());
 		userService.save(user);
+		System.out.println("Save User : " + user);
 
 		CustomerContextHolder.setCustomerType(CustomerContextHolder.DATA_SOURCE_B);
 		User user2 = new User();
@@ -36,6 +37,7 @@ public class ProxyTest extends AbstractJUnit4SpringContextTests {
 		user2.setAddress("上海");
 		user2.setCreatedAt(new Date());
 		userService.save(user2);
+		System.out.println("Save User : " + user);
 	}
 
 	@Test
@@ -43,7 +45,6 @@ public class ProxyTest extends AbstractJUnit4SpringContextTests {
 		CustomerContextHolder.setCustomerType(CustomerContextHolder.DATA_SOURCE_A);
 		List<User> users = userService.query();
 		System.out.println(users);
-		System.out.println("----------------------------------------------------");
 
 		CustomerContextHolder.setCustomerType(CustomerContextHolder.DATA_SOURCE_B);
 		users = userService.query();

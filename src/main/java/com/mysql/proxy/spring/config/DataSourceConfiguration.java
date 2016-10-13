@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,22 +23,18 @@ import com.mysql.proxy.spring.ds.DynamicDataSource;
 @PropertySource("classpath:jdbc.properties")
 public class DataSourceConfiguration {
 
-	private static final Logger logger = Logger.getLogger(DataSourceConfiguration.class);
-
 	@Autowired
 	private Environment env;
 
 	@Bean(name = "jdbcTemplate")
 	public JdbcTemplate jdbcTemplate() {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dynamicDataSource());
-		logger.info("Create jdbcTemplate...");
 		return jdbcTemplate;
 	}
 
 	@Bean(name = "txManager")
 	public DataSourceTransactionManager txManager() {
 		DataSourceTransactionManager txManager = new DataSourceTransactionManager(dynamicDataSource());
-		logger.info("Create txManager...");
 		return txManager;
 	}
 
@@ -52,7 +47,6 @@ public class DataSourceConfiguration {
 		targetDataSources.put(CustomerContextHolder.DATA_SOURCE_A, dataSourceA());
 		targetDataSources.put(CustomerContextHolder.DATA_SOURCE_B, dataSourceB());
 		dynamicDataSource.setTargetDataSources(targetDataSources);
-		logger.info("Create dynamicDataSource...");
 		return dynamicDataSource;
 	}
 
@@ -64,7 +58,6 @@ public class DataSourceConfiguration {
 		dataSource.setUsername(env.getProperty("jdbcA.user"));
 		dataSource.setPassword(env.getProperty("jdbcA.password"));
 		dataSource.setValidationQuery("SELECT 'x'");
-		logger.info("Create " + CustomerContextHolder.DATA_SOURCE_A + "...");
 		return dataSource;
 	}
 
@@ -76,7 +69,6 @@ public class DataSourceConfiguration {
 		dataSource.setUsername(env.getProperty("jdbcB.user"));
 		dataSource.setPassword(env.getProperty("jdbcB.password"));
 		dataSource.setValidationQuery("SELECT 'x'");
-		logger.info("Create " + CustomerContextHolder.DATA_SOURCE_B + "...");
 		return dataSource;
 	}
 }
