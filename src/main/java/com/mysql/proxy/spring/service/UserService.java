@@ -1,12 +1,12 @@
 package com.mysql.proxy.spring.service;
 
-import java.util.List;
-
 import com.mysql.proxy.spring.bean.User;
+
+import java.util.List;
 
 public interface UserService {
 
-	void save(User user);
+    void save(User user);
 
-	List<User> query();
+    List<User> query();
 }

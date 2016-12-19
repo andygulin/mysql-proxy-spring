@@ -1,12 +1,12 @@
 package com.mysql.proxy.spring.dao;
 
-import java.util.List;
-
 import com.mysql.proxy.spring.bean.User;
+
+import java.util.List;
 
 public interface UserDao {
 
-	void save(User user);
+    void save(User user);
 
-	List<User> query();
+    List<User> query();
 }
